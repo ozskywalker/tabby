@@ -157,6 +157,16 @@ export default class AppModule { // eslint-disable-line @typescript-eslint/no-ex
     ) {
         app.ready$.subscribe(() => {
             config.ready$.toPromise().then(() => {
+                if (config.store.alwaysStartNewTabonNewWindow) {
+                    const profiles = profilesService.getRecentProfiles()
+                    if (profiles.length > 0) { // check there are profiles
+                        if (app.tabs.length < 1) { // check there are no tabs opened
+                            if (config.store.recoverTabs && window.localStorage.tabsRecovery.length < 3) { // check there are no tabs to recover or tabrecover feature is off
+                                profilesService.openNewTabForProfile(profiles[0]) // use last profile
+                            }
+                        }
+                    } 
+                }
                 if (config.store.enableWelcomeTab) {
                     app.openNewTabRaw({ type: WelcomeTabComponent })
                 }

@@ -36,6 +36,7 @@ profileDefaults:
   ssh:
     disableDynamicTitle: true
 recoverTabs: true
+alwaysStartNewTabonNewWindow: true
 enableAnalytics: true
 enableWelcomeTab: true
 electronFlags:

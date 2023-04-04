@@ -216,6 +216,16 @@ div.mt-4
             (ngModelChange)='config.save()',
         )
 
+    .form-line(*ngIf='hostApp.platform !== Platform.Web')
+        .header
+            .title(translate) Auto-open a terminal on new window
+            .description(translate) Opens terminal based on last used profile if no other tabs are open
+        
+        toggle(
+            [(ngModel)]='config.store.alwaysStartNewTabonNewWindow',
+            (ngModelChange)='config.save()',
+        )
+
     .form-line
         .header
             .title(translate) Restore terminal tabs on app start
